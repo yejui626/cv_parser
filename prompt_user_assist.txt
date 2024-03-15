@@ -1,0 +1,81 @@
+{
+    "Name": "Ang Teik Hun",
+    "Age": "28",
+    "Phone Number": "+60124773683",
+    "Email": "teikhun0422@hotmail.com",
+    "Local": "Yes",
+    "Expected Salary in RM": "4000-4800",
+    "Candidate current location": [
+            {
+            "Country": "Malaysia",
+            "State": "Penang",
+            "City": "Butterworth"
+            }
+    ],
+    "Education Background": [
+        {
+            "Field of Study": "Applied Data Analytics",
+            "Level": "Master's",
+            "CGPA": "6.42/7",
+            "University": "Australian National University",
+            "Start Date": "July 2021",
+            "Year of Graduation": "2022"
+        }
+    ],
+    "Professional Certificate": [
+        "Microsoft Certified: Azure Fundamentals",
+        "Microsoft Certified: Azure AI Engineer Associate"
+    ],
+    "Skill Groups": [
+        "Analytical Thinking Skills",
+        "Adaptability",
+        "Time Management",
+        "Leadership",
+        "Power BI",
+        "Python",
+        "Neural Network",
+        "Machine Learning",
+        "SKlearn",
+        "Database SQL",
+        "Data Wrangling",
+        "Optimization",
+        "SQL",
+        "Postgres",
+        "Redshift",
+        "MySQL"
+    ],
+    "Technology (Tools, Program, System)": [
+        "Python",
+        "R",
+        "SQL",
+        "Power BI",
+        "JSON"
+    ],
+    "Language": [
+        "Chinese",
+        "English",
+        "Malay",
+        "French"
+    ],
+    "Previous job roles": [
+        {
+            "Job Title": "Tutor",
+            "Job Company": "Australian National University",
+            "Industries": "Education",
+            "Start Date": "June 2022",
+            "End Date": "Dec 2022",
+            "Job Location": "Canberra, Australia",
+            "Job Duration (Years)": "0.5"
+        },
+        {
+            "Job Title": "Internship as Data Scientist",
+            "Job Company": "Petroliam Nasional Berhad Group Digital",
+            "Industries": "Oil and Gas, Petrochemicals, Refining, Retail, Shipping, Exploration and Production, Engineering and Construction",
+            "Start Date": "November 2020",
+            "End Date": "July 2021",
+            "Job Location": "KL, Malaysia",
+            "Job Duration (Years)": "0.6"
+        }
+    ]
+
+}

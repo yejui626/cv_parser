@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% block title %}<title style="color: black; background-color: #66E2FF">Resume Parser</title> {% endblock %}
+{% block head %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" 
+  href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css"/>
+
+  <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/basic.min.css"/>
+
+  <script type="application/javascript" 
+    src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.js">
+  </script>
+  
+  <style>
+    body {
+      background-color: #FFFFFF;
+      color: #66E2FF;
+      font-family: Arial;
+      font-size: 18px;
+      margin-left: 80px;
+      /* Adjusted margin */
+    }
+
+    table,
+    th,
+    td {
+      background-color: #FFFFFF;
+      color: #000000;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      margin-left: 10px;
+      /* Adjusted margin */
+      border: 1px solid;
+    }
+
+    p {
+      background-color: #FFFFFF;
+      color: #000000;
+      font-family: Arial;
+      font-size: 14px;
+    }
+
+    h2 {
+      background-color: #66E2FF;
+      color: black;
+      padding: 10px;
+      /* Added padding */
+    }
+
+    h3 {
+      margin-right: 10px;
+    }
+
+    input {
+      width: 200px;
+      /* Adjusted width */
+    }
+
+    .sectionDes {
+      width: 600px;
+      display: table-cell;
+    }
+
+    .sectionReq {
+      display: table-cell;
+    }
+
+    .sectionBoth {
+      width: 100%;
+      display: table;
+    }
+
+
+    .sectionMatchIndustry {
+      display: flex;
+      justify-content: space-between;
+    }
+    .resume_status_header{
+      color:#66E2FF;
+      display: inline; /* or inline */
+      width: 250px; /* Adjust width as needed */
+      margin-right: 10px; /* Adjust margin as needed */
+      font-weight: bold;
+    }
+    .resume_status_item {
+      display: inline; /* Display items inline */
+      margin-right: 20px; /* Add some space between items */
+    }
+
+    .jobTitleContainer {
+      display: flex;
+      align-items: center;
+      /* Optional: Align items vertically in the center */
+    }
+
+    .criteria {
+      margin-top: 20px;
+    }
+
+    .criteria h3 {
+      text-decoration: underline;
+    }
+
+    .table-container {
+      display: table;
+      width: 100%;
+    }
+
+    .row {
+      display: table-row;
+    }
+
+    .column {
+      display: table-cell;
+      padding: 10px;
+      /* Adjust padding as needed */
+    }
+
+    label {
+      width: 200px;
+      margin-bottom: 5px;
+    }
+
+    select {
+      width: 150px;
+      /* Adjust the width as needed */
+    }
+
+    .disable-checkbox {
+      margin-right: -90px;
+      margin-left: -90px;
+      /* margin-top: -3px; */
+    }
+
+    .label-dropdown {
+      display: flex;
+      align-items: center;
+    }
+
+    input.slider {
+      width: 100px;
+      /* You can change this value to make the slider shorter or longer */
+    }
+
+    /* Optional: Adjust the width of the input boxes */
+    .input-box {
+      width: 150px;
+      /* You can change this value based on your design */
+    }
+
+    .dz-file-preview{
+      margin-bottom:20px;
+    }
+
+    .label-dropdown input {
+      margin-right: 10px;
+      /* Adjust the margin value as needed */
+    }
+
+    .total-row {
+      font-weight: bold;
+    }
+  }
+        #chatbox {
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        margin-top: 60px;
+      }
+      #userInput {
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        margin-top: 60px;
+      }
+      #textInput {
+        width: 90%;
+        border: none;
+        border-bottom: 3px solid black;
+        font-family: monospace;
+        font-size: 17px;
+      }
+      .userText {
+        color: white;
+        font-family: monospace;
+        font-size: 17px;
+        text-align: right;
+        line-height: 30px;
+      }
+      .userText span {
+        background-color: #808080;
+        padding: 10px;
+        border-radius: 2px;
+      }
+      .botText {
+        color: white;
+        font-family: monospace;
+        font-size: 17px;
+        text-align: left;
+        line-height: 30px;
+      }
+      .botText span {
+        background-color:#66E2FF;
+        padding: 10px;
+        border-radius: 2px;
+      }
+      #tidbit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+      }
+      .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 78%;
+        margin-top: 60px;
+        border: 1px solid green;
+      }
+  </style>
+</head>
+{% endblock %}  
+{% block body %}
+<body>
+  <h2>CV Matching</h2>
+
+  <form method="POST" action='/upload' class="dropzone dz-clickable" 
+      id="dropper" enctype="multipart/form-data">
+
+    <input type="hidden" name="batch_token" value="{{ batch_token }}">
+    
+    <div class="container jobTitleContainer">
+      <h3>Choose the applicant category:</h3>
+        <select id="applicant-category" name="applicant-category" required>
+          <option value="">Select category</option>
+          <option value="fresh-graduate">Fresh graduate</option>
+          <option value="experienced-hire">Experienced Hire</option>
+          <option value="head">Head</option>
+        </select>
+    </div>
+
+    <div class="container jobTitleContainer">
+      <h3>Please enter a job title:</h3>
+      <input type="text" id="job_title" name="job_title" maxlength="50" size="20" required />
+    </div>
+
+    <div class="sectionBoth">
+      <div class='sectionDes'>
+        <div class="innerSec">
+          <h3>Please provide a job description:</h3>
+          <textarea id="job-description" name="job-description" rows="5" cols="70" required></textarea>
+        </div>
+      </div>
+      <div class='sectionReq'>
+        <div class="innerSec">
+          <h3>Please provide a job requirement:</h3>
+          <textarea id="job-requirement" name="job-requirement" rows="5" cols="70" required></textarea>
+        </div>
+      </div>
+    </div>
+
+    <h3>Please provide your email:</h3>
+    <input type="text" id="email" name="email" required>
+
+      <br>
+      <br>
+
+      <h3>Upload your criteria here:</h3>
+      <p style="color:#66E2FF;font-size:16px">Please download the template file from <a href="/download_criteria" style="cursor:pointer;">here</a></p>
+      <input type="file" id="file_criteria" name="file_criteria" multiple accept="*.xlsx" />
+      <p id="fileNameDisplay">No file chosen</p>
+
+      <br>
+
+      
+      <h3> Upload Resume file in <i>.docx</i> or <i>.pdf</i>. </h3>
+      <p style="color:black;font-size:14px">You may upload more than 1 file.</p>
+
+      <script type="application/javascript">
+        Dropzone.options.dropper = {
+            paramName: 'file',
+            chunking: true,
+            url:'/upload_files',
+            acceptedFiles: '.pdf,.doc,.docx',
+            forceChunking: true,
+            maxFilesize: 1025, // megabytes
+            chunkSize: 1000000 // bytes
+        }
+      </script>
+      <div>
+        -------------------------------------------------------------------------------------------------------------------------------------
+      </div>
+    </div>
+    <br>
+    <button type="submit" style="
+        position: absolute;
+        left: 10px;
+        bottom: 1px;
+    ">Parse Resume</button>
+  </form>
+
+  <br><br><br>
+
+  <body>
+  <h1>Download File</h1>
+  {% if error_status %}
+    <script>
+      alert(
+        "Error: {{error_status}}"
+      );
+    </script>
+  {% endif %}
+  {% if resume_status %}
+    <script>
+      alert(
+        "Total Resumes Uploaded: {{ resume_status.total_resumes_uploaded }}\n" +
+        "Total Resumes Successfully Uploaded: {{ resume_status.resumes_upload_succeeded_count }}\n" +
+        "Total Resumes Failed to be Uploaded: {{ resume_status.resumes_upload_failed_count }}\n" +
+        "Failed Resumes Info: {{ resume_status.failed_resumes_info }}\n" +
+        "\n" +
+        "Approximate Total Program Time: {{ resume_status.approx_total_in_hmd }}\n" +
+        "Program Start Time: {{ resume_status.program_start_time }}\n" +
+        "Program Estimated End Time: {{ resume_status.program_end_time_estimation }}\n" +
+        "Please enter this file name to download: {{ result_file_name }}"
+      );
+    </script>
+    <label class="resume_status_item resume_status_header">Total Resumes Uploaded:</label><p class="resume_status_item">{{ resume_status.total_resumes_uploaded }}</p><br>
+    <label class="resume_status_item resume_status_header">Total Resumes Successfully Uploaded:</label><p class="resume_status_item">{{ resume_status.resumes_upload_succeeded_count }}</p><br>
+    <label class="resume_status_item resume_status_header">Total Resumes Failed to be Uploaded:</label><p class="resume_status_item">{{ resume_status.resumes_upload_failed_count }}</p><br>
+    <label class="resume_status_item resume_status_header">Failed Resumes Info:</label><p class="resume_status_item">{{ resume_status.failed_resumes_info }}</p><br>
+    <br>
+    <label class="resume_status_item resume_status_header">Approximate Total Program Time:</label><p class="resume_status_item">{{ resume_status.approx_total_in_hmd }}</p><br>
+    <label class="resume_status_item resume_status_header">Program Start Time:</label><p class="resume_status_item">{{ resume_status.program_start_time }}</p><br>
+    <label class="resume_status_item resume_status_header">Program Estimated End Time:</label><p class="resume_status_item">{{ resume_status.program_end_time_estimation }}</p><br><br>
+    <label class="resume_status_item resume_status_header">Please enter this file name to download:</label><p class="resume_status_item">{{ result_file_name }}</p><br>
+  {% endif %}
+  <br> 
+  <form action="/download" method="POST">
+    <label for="file_name">File Name:</label>
+    <input type="text" id="file_name" name="file_name" required>
+    <br><br>
+    <input type="submit" value="Download">
+  </form>
+
+  <!-- WebSocket JavaScript library (if not already included) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+
+
+  <br><br>
+
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,23 @@
+# virtual env
+/venv
+
+# Folders
+/__pycache__
+/upload
+/download
+/conf
+
+# Except for .gitkeep
+!.gitkeep
+
+# Extensions
+*.bat
+.ipynb
+*__pycache__
+# *.xlsx
+# *.txt
+*.pdf
+.env
+
+# Except
+!setup_spacy.bat
