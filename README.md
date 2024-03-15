@@ -15,6 +15,9 @@ This Resume Parser is a Python-based application that is designed to extract rel
 3. **Asynchronous Parsing**: For batch processing of multiple PDF resumes, utilize the `parsing` method, which asynchronously parses all resumes in the specified directory.
 4. **Result Export**: Export the parsed candidate information to a DataFrame for further analysis or integration with an ATS.
 
+## Example Output
+You may access to the [Example Output](https://github.com/yejui626/cv_parser/files/14612326/CVParser_2024-03-15_150224.xlsx) that includes the extracted information for the candidate, the information for the selected criteria and the evaluation results based on the assigned weightage.
+
 ## Dependencies
 - Python 3.8
 - OpenAI GPT models (gpt-3.5-turbo-0125 & text-embeddings-ada-002)
