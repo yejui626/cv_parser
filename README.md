@@ -25,7 +25,3 @@ This Resume Parser is a Python-based application that is designed to extract rel
 - spaCy
 - LangChain
 
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
